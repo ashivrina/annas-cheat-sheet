@@ -43,10 +43,8 @@ public class PracticeFormTests {
 
         //Entering date of birth
         $("#dateOfBirthInput").click();
-        $("select.react-datepicker__month-select").click();
-        $(byText("February")).click();
-        $("select.react-datepicker__year-select").click();
-        $(byText("1991")).click();
+        $("select.react-datepicker__month-select").selectOption("February");
+        $("select.react-datepicker__year-select").selectOption("1991");
         $(byText("14")).click();
 
         //Selecting a subject

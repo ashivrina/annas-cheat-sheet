@@ -1,25 +1,18 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
+import utils.TestBase;
 
 import static io.qameta.allure.Allure.step;
 
-public class PracticeFormTests {
+public class PracticeFormTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     Faker faker = new Faker();
     RandomUtils utils = new RandomUtils();
-
-    @BeforeAll
-    static void setUp() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.startMaximized = true;
-    }
 
     @Test
     void positivePracticeFormTest() {

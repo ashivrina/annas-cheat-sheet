@@ -7,15 +7,7 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
 
-import java.io.File;
-import java.time.LocalDate;
-import java.util.Date;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.by;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 
 public class PracticeFormTests {
 
@@ -34,7 +26,6 @@ public class PracticeFormTests {
         //sorry, couldn't help it. this is just an easter egg for a reviewer (hopefully also a fan of HG2G)
         System.out.println(faker.hitchhikersGuideToTheGalaxy().quote());
 
-        //now to the serious stuff. create values for our variables with faker and utils
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String email = faker.internet().emailAddress();
@@ -50,35 +41,55 @@ public class PracticeFormTests {
         String city = "Karnal";
 
         //Opening and filling the form
-        registrationPage
-                .openPage()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmail(email)
-                .selectGender(gender)
-                .typePhone(phoneNumber)
-                .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
-                .selectSubject(subject)
-                .selectHobby(hobby)
-                .uploadFile("src/test/resources/bear-ava.png")
-                .enterAddress(address)
-                .selectState(state)
-                .selectCity(city)
-                .submitForm();
+        step("Open students registration form", () -> {
+            registrationPage
+                    .openPage();
+        });
+        step("Fill general info", () -> {
+            registrationPage
+                    .typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .typeEmail(email)
+                    .selectGender(gender)
+                    .typePhone(phoneNumber);
+        });
+        step("Set a date of birth", () -> {
+            registrationPage
+                    .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth);
+        });
+        step("Select a subject", () -> {
+            registrationPage
+                    .selectSubject(subject);
+        });
+        step("Select a hobby", () -> {
+            registrationPage
+                    .selectHobby(hobby);
+        });
+        step("Upload a file", () -> {
+            registrationPage
+                    .uploadFile("src/test/resources/bear-ava.png");
+        });
+        step("Enter address", () -> {
+            registrationPage
+                    .enterAddress(address)
+                    .selectState(state)
+                    .selectCity(city)
+                    .submitForm();
+        });
 
-        //Checking the results
-        registrationPage
-                .checkResultsTitle()
-                .checkResultsValue(firstName + " " + lastName)
-                .checkResultsValue(email)
-                .checkResultsValue(gender)
-                .checkResultsValue(phoneNumber)
-                .checkResultsValue(dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
-                .checkResultsValue(subject)
-                .checkResultsValue(hobby)
-                .checkResultsValue("bear-ava.png")
-                .checkResultsValue(address)
-                .checkResultsValue(state + " " + city);
-
+        step("Verify form was submitted successfully", () -> {
+            registrationPage
+                    .checkResultsTitle()
+                    .checkResultsValue(firstName + " " + lastName)
+                    .checkResultsValue(email)
+                    .checkResultsValue(gender)
+                    .checkResultsValue(phoneNumber)
+                    .checkResultsValue(dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
+                    .checkResultsValue(subject)
+                    .checkResultsValue(hobby)
+                    .checkResultsValue("bear-ava.png")
+                    .checkResultsValue(address)
+                    .checkResultsValue(state + " " + city);
+        });
     }
 }

@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
-import utils.TestBase;
 
 import static io.qameta.allure.Allure.step;
 

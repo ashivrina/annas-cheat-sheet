@@ -20,7 +20,8 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        Configuration.remote = System.getProperty("remoteDriver");
         Configuration.baseUrl = "https://demoqa.com";
     }
 

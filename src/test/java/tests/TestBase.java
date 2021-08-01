@@ -22,6 +22,7 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
+        Configuration.browser = System.getProperty("browser", "chrome");
 
         String login = credentials.login();
         String password = credentials.password();

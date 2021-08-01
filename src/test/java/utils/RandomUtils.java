@@ -18,17 +18,14 @@ public class RandomUtils {
 
     public String getDayOfMonth() {
         return Integer.valueOf(convertDateToLocalDate(dateOfBirth).getDayOfMonth()).toString();
-
     }
 
     public String getMonth() {
         return convertDateToLocalDate(dateOfBirth).getMonth().getDisplayName(FULL, Locale.ENGLISH);
-
     }
 
     public String getYear() {
         return Integer.valueOf(convertDateToLocalDate(dateOfBirth).getYear()).toString();
-
     }
 
     public LocalDate convertDateToLocalDate(Date dateToConvert) {

@@ -7,7 +7,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.Attach;
-;
+
+import static config.Credentials.credentials;
+import static java.lang.String.format;
 
 public class TestBase {
 
@@ -20,8 +22,13 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
-        Configuration.remote = System.getProperty("remoteDriver");
+
+        String login = credentials.login();
+        String password = credentials.password();
+        //This is for when we pass the URL as a property
+        String url = System.getProperty("url", "selenoid.autotests.cloud/wd/hub/");
+        Configuration.remote = format("https://%s:%s@%s", login, password, url);
+
         Configuration.baseUrl = "https://demoqa.com";
     }
 

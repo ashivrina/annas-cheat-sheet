@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import config.Credentials;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
